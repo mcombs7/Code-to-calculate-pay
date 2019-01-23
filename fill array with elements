@@ -1,0 +1,136 @@
+#include <iostream> 
+using namespace std;
+
+void inputArray(int ArrayNumber[], int position);
+void printArray(int Array[], int sizeOfArray);
+void stats(int ArrayMath[], int number);
+void search(int ArraySearch[], int search);
+
+int main()
+{
+        //array
+        int score[100], SIZE; 
+        cout << endl; 
+        char menuSe;
+
+        cout << "How many elements would you like to fill ?  ";
+        cin >> SIZE;
+        inputArray(score, SIZE);
+        printArray(score, SIZE); 
+        stats(score, SIZE);
+    
+        cout << endl;
+    
+        do  
+        {   
+                cout << endl << "Select :  [l]ook up element  " << endl;
+                cout <<         "          [p]rint table" << endl;
+                cout <<         "           e[x]it " << endl;
+
+                cin >> menuSe;
+    
+                if (menuSe == 'l')
+                        search(score, SIZE);
+                else if ( menuSe == 'p')
+                {   
+                        printArray(score, SIZE);
+                        stats(score, SIZE);
+                }   
+        }   
+        while ((menuSe == 'l') || (menuSe == 'p')); 
+    
+        return 0;
+}    
+
+void inputArray(int ArrayNumber[], int position)
+{
+        for(int y = 0; y < position; y++)
+        {   
+                int z = y + 1;
+
+                cout << "Enter number " <<  z  << " : ";
+                cin >> ArrayNumber[y];
+        }
+}
+void printArray(int Array[], int sizeOfArray)
+{
+        cout  << endl << "You have entered: " << endl;
+        cout << "Position    Value " <<endl;
+        cout << "________    ______" << endl;
+        for(int x = 0; x <sizeOfArray; x++)
+        {
+                int w = x + 1;
+                cout << "       " << w << ".   " << Array[x] << endl;
+        }
+}
+
+void stats(int ArrayMath[], int number)
+{
+        //variables
+        int large, small, sum = 0.0;
+        double average;
+
+        //defining variables
+        large = ArrayMath[0];
+        small = ArrayMath[0];
+
+
+        for (int a = 0; a < number; a++)
+                sum = sum + ArrayMath[a];
+
+        cout.setf(ios::fixed);
+        cout.setf(ios::showpoint);
+        cout.precision(1);
+
+        average = sum/number;
+        for (int a = 1; a < number; a++)
+        {
+                if (ArrayMath[a] > large)
+                large = ArrayMath[a];
+                else if (ArrayMath[a] < small)
+                small = ArrayMath[a];
+        }
+                cout << endl <<  "            The sum is  " << sum << endl;
+                cout <<          "        The average is  " << average << endl;
+                cout <<          " The largest numner is  " << large << endl;
+                cout <<          "The smallest numner is  " << small << endl;
+
+}
+
+void search(int ArraySearch[], int search)
+{
+        int q, r, s, t;
+        char answer;
+
+        cout << endl << "What element would you like to search for?   " ;
+        cin >>  s;
+
+        for (r = 0; r  < search; r++)
+                if (s == ArraySearch[r])
+                break;
+                if (s == ArraySearch[r])
+                {
+                        int t = r + 1;
+                        cout << s << " is at position " << t << endl << endl;
+
+                        cout << "would you like to replace this element (r) ?  " << endl;
+                        cout << "or clear the element (c) ?" << endl;
+                        cout << "exit (x)" << endl ;
+
+                        cin >> answer;
+                        if (answer == 'r' || answer == 'R')
+                        {
+                                cout << endl << "Enter new element : ";
+                                cin >> q;
+                                ArraySearch[r] = q;
+                                cout << q << " is at position " << t << endl;
+                        }
+                        else if ( answer == 'c' || answer == 'C')
+                        {
+                                ArraySearch[r] = 0;
+                        }
+                        else
+                                cout << endl;
+                }
+}
+                             
